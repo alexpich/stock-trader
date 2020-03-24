@@ -9,19 +9,31 @@
       </div>
       <div class="card-body">
         <div class="float-left">
-          <input type="number" class="form-control" placeholder="quantity" v-model="quantity" />
+          <input
+            type="number"
+            class="form-control"
+            placeholder="quantity"
+            v-model="quantity"
+            :class="{danger: insufficientQuantity}"
+          />
         </div>
         <div class="float-right">
           <button
             class="btn btn-success"
             @click="sellStock"
-            :disabled="quantity <= 0 || !Number.isInteger(parseInt(quantity))"
-          >Sell</button>
+            :disabled="insufficientQuantity || quantity <= 0 || !Number.isInteger(parseInt(quantity))"
+          >{{insufficientQuantity ? 'Invalid Amt' : 'Sell'}}</button>
         </div>
       </div>
     </div>
   </div>
 </template>
+
+<style scoped>
+.danger {
+  border: 1px solid red;
+}
+</style>
 
 <script>
 import { mapActions } from "vuex";
@@ -32,6 +44,11 @@ export default {
     return {
       quantity: 0
     };
+  },
+  computed: {
+    insufficientQuantity() {
+      return this.quantity > this.stock.quantity;
+    }
   },
   methods: {
     ...mapActions({ placeSellOrder: "sellStock" }),
@@ -47,3 +64,4 @@ export default {
   }
 };
 </script>
+
