@@ -11,7 +11,6 @@
           <a class="nav-link">Stocks</a>
         </router-link>
       </ul>
-      <strong class="navbar-text ml-auto">Funds: {{ funds | currency }}</strong>
       <ul class="nav navbar-nav ml-auto">
         <li>
           <a href="#" class="nav-link" @click="endDay">End Day</a>
@@ -27,11 +26,12 @@
             aria-expanded="false"
           >Save & Load</a>
           <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-            <a class="dropdown-item" href="#">Save Data</a>
-            <a class="dropdown-item" href="#">Load Data</a>
+            <a class="dropdown-item" href="#" @click="saveData()">Save Data</a>
+            <a class="dropdown-item" href="#" @click="loadData()">Load Data</a>
           </div>
         </li>
       </ul>
+      <strong class="navbar-text ml-3">Funds: {{ funds | currency }}</strong>
     </div>
   </nav>
 </template>
@@ -46,9 +46,23 @@ export default {
     }
   },
   methods: {
-    ...mapActions(["randomizeStocks"]),
+    ...mapActions({
+      randomizeStocks: "randomizeStocks",
+      fetchData: 'loadData'
+    }),
     endDay() {
       this.randomizeStocks();
+    },
+    saveData() {
+      const data = {
+        funds: this.$store.getters.funds,
+        stockPortfolio: this.$store.getters.stockPortfolio,
+        stocks: this.$store.getters.stocks
+      };
+      this.$http.put("data.json", data);
+    },
+    loadData() {
+      this.fetchData();
     }
   }
 };
