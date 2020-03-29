@@ -1,8 +1,19 @@
 <template>
   <nav class="navbar navbar-expand-lg navbar-light bg-light">
     <router-link to="/" class="navbar-brand" href="#">Stock Trader</router-link>
+    <button
+      class="navbar-toggler"
+      type="button"
+      data-toggle="collapse"
+      data-target="#navbarSupportedContent"
+      aria-controls="navbarSupportedContent"
+      aria-expanded="false"
+      aria-label="Toggle navigation"
+    >
+      <span class="navbar-toggler-icon"></span>
+    </button>
 
-    <div class="collapse navbar-collapse" id="navbarNav">
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav">
         <router-link to="/portfolio" class="nav-item" activeClass="active" tag="li">
           <a class="nav-link">Portfolio</a>
@@ -48,7 +59,7 @@ export default {
   methods: {
     ...mapActions({
       randomizeStocks: "randomizeStocks",
-      fetchData: 'loadData'
+      fetchData: "loadData"
     }),
     endDay() {
       this.randomizeStocks();

@@ -1,9 +1,9 @@
 <template>
   <div class="container">
     <app-header />
-        <transition name="slide" mode="out-in">
-          <router-view />
-        </transition>
+    <transition name="slide" mode="out-in">
+      <router-view />
+    </transition>
   </div>
 </template>
 
