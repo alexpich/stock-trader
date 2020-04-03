@@ -5,7 +5,7 @@ module.exports = {
       awsProfile: 'default',
       overrideEndpoint: false,
       region: 'us-west-1',
-      bucket: 'vuejs-stock-trader-app-deploy',
+      bucket: 'vue-stock-trader-mock',
       createBucket: false,
       staticHosting: true,
       staticIndexPage: 'index.html',
